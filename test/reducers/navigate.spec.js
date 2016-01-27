@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const { PUSH, POP, REPLACE } = require('../../constants/navigation');
 const reducer = require('../../reducers/navigate');
-const initialState = require('../../initialState');
+const initialState = require('../../makeInitialNavigationState')();
 
 describe('navigate reducer', () => {
   it('expect to return an initial state if no valid action provided', () => {

@@ -1,3 +1,5 @@
-export const PUSH = 'PUSH';
-export const POP = 'POP';
-export const REPLACE = 'REPLACE';
+module.exports = {
+  PUSH: 'PUSH',
+  POP: 'POP',
+  REPLACE: 'REPLACE',
+};

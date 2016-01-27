@@ -1,6 +1,6 @@
-import { PUSH, POP, REPLACE } from '../constants/navigation';
+const { PUSH, POP, REPLACE } = require('../constants/navigation');
 
-export default function navigate(state, action) {
+module.exports = function navigate(state, action) {
   const stack = state.__nav.stack;
   const index = state.__nav.index;
 
@@ -35,4 +35,4 @@ export default function navigate(state, action) {
     default:
       return state;
   }
-}
+};

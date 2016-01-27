@@ -1,21 +1,23 @@
-import { PUSH, POP, REPLACE } from '../constants/navigation';
+const { PUSH, POP, REPLACE } = require('../constants/navigation');
 
-export function push(component) {
-  return {
-    type: PUSH,
-    payload: component,
-  };
-}
+module.exports = {
+  push: function push(component) {
+    return {
+      type: PUSH,
+      payload: component,
+    };
+  },
 
-export function pop() {
-  return {
-    type: POP,
-  };
-}
+  pop: function pop() {
+    return {
+      type: POP,
+    };
+  },
 
-export function replace(component) {
-  return {
-    type: REPLACE,
-    payload: component,
-  }
-}
+  replace: function replace(component) {
+    return {
+      type: REPLACE,
+      payload: component,
+    };
+  },
+};
