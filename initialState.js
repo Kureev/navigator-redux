@@ -1,5 +1,8 @@
 import Immutable from 'immutable';
 
 export default {
-  __nav: new Immutable.Stack(),
+  __nav: {
+    stack: new Immutable.Stack(),
+    index: 0,
+  },
 };
