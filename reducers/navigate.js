@@ -1,9 +1,11 @@
+import { PUSH, POP, REPLACE } from '../constants/navigation';
+
 export default function navigate(state, action) {
   const stack = state.__nav.stack;
   const index = state.__nav.index;
 
   switch (action.type) {
-    case 'PUSH':
+    case PUSH:
       return Object.assign({}, state, {
         __nav: {
           stack: stack.unshift(action.payload),
@@ -11,7 +13,7 @@ export default function navigate(state, action) {
         },
       });
 
-    case 'POP':
+    case POP:
       if (index === stack.count()) {
         return state;
       }
@@ -23,7 +25,7 @@ export default function navigate(state, action) {
         },
       });
 
-    case 'REPLACE':
+    case REPLACE:
       return Object.assign({}, state, {
         __nav: {
           stack: stack.splice(index, 1, action.payload),

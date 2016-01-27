@@ -1,19 +1,21 @@
+import { PUSH, POP, REPLACE } from '../constants/navigation';
+
 export function push(component) {
   return {
-    type: 'PUSH',
+    type: PUSH,
     payload: component,
   };
 }
 
 export function pop() {
   return {
-    type: 'POP',
+    type: POP,
   };
 }
 
 export function replace(component) {
   return {
-    type: 'REPLACE',
+    type: REPLACE,
     payload: component,
   }
 }
