@@ -12,6 +12,7 @@ const styles = StyleSheet.create({container: {flex: 1}});
  * @param  {Number} options.index Navigation stack's current index
  * @param  {Immutable.Stack} options.stack Navigation stack
  * @param  {Object} options.actions Navigator's actions
+ * @param  {Number|Object} options.style Custom navigator style
  * @return {React.Element}
  */
 function renderNavigator({index, stack, actions, style}) {
