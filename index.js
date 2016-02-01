@@ -1,3 +1,3 @@
 module.exports = {
-  makeInitialNavigationState: require('./makeInitialNavigationState'),
+  makeNavState: require('./makeNavState'),
 };
