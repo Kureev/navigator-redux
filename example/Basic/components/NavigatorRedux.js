@@ -1,38 +1,32 @@
-import React, { Component, View, StyleSheet } from 'react-native';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import actions from '../actions/navigation';
+const React = require('react-native');
+const {bindActionCreators} = require('redux');
+const {connect} = require('react-redux');
+const actions = require('../actions/navigation');
+const invariant = require('invariant');
 
-import invariant from 'invariant';
+const {View, StyleSheet} = React;
+const styles = StyleSheet.create({container: {flex: 1}});
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+/**
+ * A functional component for rendering navigator
+ * @param  {Number} options.index Navigation stack's current index
+ * @param  {Immutable.Stack} options.stack Navigation stack
+ * @param  {Object} options.actions Navigator's actions
+ * @return {React.Element}
+ */
+function renderNavigator({index, stack, actions, style}) {
+  const route = stack.get(index);
 
-class NavigatorRedux extends Component {
-  render() {
-    const { index, stack, actions } = this.props;
-    const route = stack.get(index);
+  invariant(route,
+    'Your navigation stack is empty. Check the place where you ' +
+    'use `makeNavState`,seems you missed to fulfill it with data!'
+  );
 
-    invariant(route,
-      'I can find no routes, dude!'
-    );
-
-    return (
-      <View style={[styles.container, this.props.style]}>
-        {React.cloneElement(route, {
-          nav: {
-            route: route,
-            index: index,
-            stack: stack,
-            actions: actions,
-          },
-        })}
-      </View>
-    );
-  }
+  return (
+    <View style={[styles.container, style]}>
+      {React.cloneElement(route, {nav: {route, index, stack, actions}})}
+    </View>
+  );
 }
 
 export default connect(
@@ -43,4 +37,4 @@ export default connect(
   (dispatch) => ({
     actions: bindActionCreators(actions, dispatch),
   })
-)(NavigatorRedux);
+)(renderNavigator);

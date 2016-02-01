@@ -14,7 +14,7 @@ const styles = StyleSheet.create({container: {flex: 1}});
  * @param  {Object} options.actions Navigator's actions
  * @return {React.Element}
  */
-function renderNavigator({index, stack, actions}) {
+function renderNavigator({index, stack, actions, style}) {
   const route = stack.get(index);
 
   invariant(route,
@@ -23,7 +23,7 @@ function renderNavigator({index, stack, actions}) {
   );
 
   return (
-    <View style={[styles.container, this.props.style]}>
+    <View style={[styles.container, style]}>
       {React.cloneElement(route, {nav: {route, index, stack, actions}})}
     </View>
   );
