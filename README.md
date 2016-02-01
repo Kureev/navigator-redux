@@ -30,6 +30,16 @@ AppRegistry.registerComponent('Basic', () => () => (
 ));
 ```
 
+## API
+Each view in the stack, while rendered, will receive a `nav` property with `index`, `stack` and `actions`.
+- **index** {Number}. Used to track your navigation stack position
+- **stack** {Immutable.Stack}. Your navigation stack
+- **actions** {Object}:
+  - **push(component)**. Push a new navigation state
+  - **pop()**. Jump back to the previous navigation state
+  - **replace(component)**. Replace a current navigation state component by a given one
+
+For further reading, [check an example](https://github.com/Kureev/navigator-redux/blob/master/example/Basic/Content.js#L50-L66).
 
 ## Status
 - [x] Simple navigation
