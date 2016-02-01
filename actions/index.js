@@ -1,4 +1,4 @@
-const { PUSH, POP, REPLACE } = require('../constants/navigation');
+const {PUSH, POP, REPLACE} = require('../constants/navigation');
 
 module.exports = {
   push: function push(component) {

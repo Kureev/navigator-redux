@@ -1,4 +1,4 @@
-const { PUSH, POP, REPLACE } = require('../constants/navigation');
+const {PUSH, POP, REPLACE} = require('../constants/navigation');
 
 module.exports = function navigate(state, {type, payload}) {
   const stack = state.__nav.stack;

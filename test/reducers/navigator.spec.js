@@ -1,6 +1,6 @@
-const { expect } = require('chai');
-const { PUSH, POP, REPLACE } = require('../../constants/navigation');
-const reducer = require('../../reducers/navigate');
+const {expect} = require('chai');
+const {PUSH, POP, REPLACE} = require('../../constants/navigation');
+const reducer = require('../../reducers');
 const initialState = require('../../makeNavState')();
 
 describe('navigate reducer', () => {
@@ -34,7 +34,7 @@ describe('navigate reducer', () => {
     expect(state.__nav.stack.count()).to.be.equal(2);
     expect(state.__nav.index).to.be.equal(0);
 
-    state = reducer(state, { type: POP });
+    state = reducer(state, {type: POP});
 
     expect(state.__nav.stack.count()).to.be.equal(2);
     expect(state.__nav.index).to.be.equal(1);
