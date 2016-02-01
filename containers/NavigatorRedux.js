@@ -30,7 +30,7 @@ function renderNavigator({index, stack, actions, style}) {
   );
 }
 
-export default connect(
+module.exports = connect(
   (state) => ({
     stack: state.__nav.stack,
     index: state.__nav.index,
