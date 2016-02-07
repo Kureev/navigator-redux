@@ -2,19 +2,17 @@ const {PUSH, POP, REPLACE} = require('../constants/navigation');
 
 module.exports = function navigate(state, {type, payload}) {
   if (!state) {
-    return {__nav: {}};
+    return {};
   }
 
-  const stack = state.__nav.stack;
-  const index = state.__nav.index;
+  const stack = state.stack;
+  const index = state.index;
 
   switch (type) {
     case PUSH:
       return Object.assign({}, state, {
-        __nav: {
-          stack: stack.unshift(payload),
-          index: 0,
-        },
+        stack: stack.unshift(payload),
+        index: 0,
       });
 
     case POP:
@@ -25,10 +23,8 @@ module.exports = function navigate(state, {type, payload}) {
       }
 
       return Object.assign({}, state, {
-        __nav: {
-          stack: stack,
-          index: incremented,
-        },
+        stack: stack,
+        index: incremented,
       });
 
     case REPLACE:
@@ -37,10 +33,8 @@ module.exports = function navigate(state, {type, payload}) {
       }
 
       return Object.assign({}, state, {
-        __nav: {
-          stack: stack.splice(index, 1, payload),
-          index: index,
-        },
+        stack: stack.splice(index, 1, payload),
+        index: index,
       });
 
     default:
