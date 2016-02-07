@@ -1,6 +1,10 @@
 const {PUSH, POP, REPLACE} = require('../constants/navigation');
 
 module.exports = function navigate(state, {type, payload}) {
+  if (!state) {
+    return {__nav: {}};
+  }
+
   const stack = state.__nav.stack;
   const index = state.__nav.index;
 
