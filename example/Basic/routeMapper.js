@@ -15,14 +15,14 @@ function routeMapper(route) {
     case 'Content':
       return {
         component: Content,
-        name: route.title,
+        title: route.title,
         passProps: route.passProps,
       };
 
     case 'PushedContent':
       return {
         component: PushedContent,
-        name: route.title,
+        title: route.title,
         passProps: route.passProps,
       };
     default:
