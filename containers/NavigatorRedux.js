@@ -27,7 +27,7 @@ function renderNavigator(props) {
   );
 
   return renderer(
-    React.cloneElement(route.component, {nav: {index, stack, actions}})
+    React.createElement(route.component, {props: route.passProps, nav: {index, stack, actions}})
   );
 }
 
@@ -41,11 +41,9 @@ renderNavigator.propTypes = {
 
 renderNavigator.defaultProps = {
   renderer: (route) => {
-    const SceneComponent = route.component;
-
     return (
       <View style={styles.container}>
-        <SceneComponent {...route.passProps} />
+        {route}
       </View>
     );
   },
