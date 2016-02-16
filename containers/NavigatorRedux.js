@@ -40,13 +40,15 @@ renderNavigator.propTypes = {
 };
 
 renderNavigator.defaultProps = {
-  renderer: (route) => (
+  renderer: (route) => {
     const SceneComponent = route.component;
 
-    <View style={styles.container}>
-      <SceneComponent {...route.passProps} />
-    </View>
-  ),
+    return (
+      <View style={styles.container}>
+        <SceneComponent {...route.passProps} />
+      </View>
+    );
+  },
 };
 
 module.exports = connect(

@@ -14,16 +14,16 @@ function routeMapper(route) {
   switch (route.title) {
     case 'Content':
       return {
-        component: Content
-        name: route.title
-        passProps: route.passProps
+        component: Content,
+        name: route.title,
+        passProps: route.passProps,
       };
 
-    case 'PushedContent'
+    case 'PushedContent':
       return {
-        component: PushedContent
-        name: route.title
-        passProps: route.passProps
+        component: PushedContent,
+        name: route.title,
+        passProps: route.passProps,
       };
     default:
       return null;
