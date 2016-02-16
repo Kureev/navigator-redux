@@ -21,13 +21,13 @@ function renderNavigator(props) {
   const {index, stack, actions, renderer, style} = props;
   const route = stack.get(index);
 
-  invariant(route,
-    'Your navigation stack is empty. Check the place where you ' +
+  invariant(route.component,
+    'You must pass a React component. Check the place where you ' +
     'use `makeNavState`,seems you missed to fulfill it with data!'
   );
 
   return renderer(
-    React.cloneElement(route, {nav: {route, index, stack, actions}})
+    React.createElement(route.component, {props: route.passProps, nav: {index, stack, actions}})
   );
 }
 
@@ -40,17 +40,15 @@ renderNavigator.propTypes = {
 };
 
 renderNavigator.defaultProps = {
-  renderer: (route) => (
-    <View style={styles.container}>
-      {route}
-    </View>
-  ),
+  renderer: (route) => {
+    <View style={styles.container}> {route} </View>;
+  },
 };
 
 module.exports = connect(
   (state) => ({
-    stack: state.__nav.stack,
-    index: state.__nav.index,
+    stack: state.__navRedux.stack,
+    index: state.__navRedux.index,
   }),
   (dispatch) => ({
     actions: bindActionCreators(actions, dispatch),

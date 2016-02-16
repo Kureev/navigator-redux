@@ -12,7 +12,10 @@ import {NavigatorRedux, makeNavState, navigationReducer} from 'navigator-redux';
 import Content from './Content';
 import {createStore, bindActionCreators} from 'redux';
 
-const store = createStore(navigationReducer, makeNavState([<Content/>]));
+const store = createStore(
+  navigationReducer,
+  makeNavState([{title: 'Content', component: Content}])
+);
 
 AppRegistry.registerComponent('Basic', () => () => (
   <Provider store={store}>

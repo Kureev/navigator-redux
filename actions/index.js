@@ -1,10 +1,10 @@
 const {PUSH, POP, REPLACE} = require('../constants/navigation');
 
 module.exports = {
-  push: function push(component) {
+  push: function push(route) {
     return {
       type: PUSH,
-      payload: component,
+      payload: route,
     };
   },
 
@@ -14,10 +14,10 @@ module.exports = {
     };
   },
 
-  replace: function replace(component) {
+  replace: function replace(route) {
     return {
       type: REPLACE,
-      payload: component,
+      payload: route,
     };
   },
 };

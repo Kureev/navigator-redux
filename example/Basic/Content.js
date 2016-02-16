@@ -49,7 +49,7 @@ export default class Content extends Component {
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => actions.push(<PushedContent />)}>
+          onPress={() => actions.push({title: 'PushedContent', component: PushedContent})}>
           <Text style={{ fontSize: 16, }}>Push</Text>
         </TouchableOpacity>
 
@@ -57,12 +57,6 @@ export default class Content extends Component {
           style={styles.button}
           onPress={() => actions.pop}>
           <Text style={{ fontSize: 16, }}>Pop</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => actions.replace(<PushedContent />)}>
-          <Text style={{ fontSize: 16, }}>Replace</Text>
         </TouchableOpacity>
       </View>
     );
