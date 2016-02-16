@@ -11,19 +11,19 @@
  * Usually one of the ones that you imported.
  */
 function routeMapper(route) {
-  switch (route.name) {
+  switch (route.title) {
     case 'Content':
       return {
         component: Content
-        name: route.name
-        props: route.props
+        name: route.title
+        passProps: route.passProps
       };
 
     case 'PushedContent'
       return {
         component: PushedContent
-        name: route.name
-        props: route.props
+        name: route.title
+        passProps: route.passProps
       };
     default:
       return null;

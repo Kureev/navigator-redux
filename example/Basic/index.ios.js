@@ -14,7 +14,7 @@ import {createStore, bindActionCreators} from 'redux';
 
 const store = createStore(
   navigationReducer,
-  makeNavState([{name: 'Content', component: Content}])
+  makeNavState([{title: 'Content', component: Content}])
 );
 
 AppRegistry.registerComponent('Basic', () => () => (

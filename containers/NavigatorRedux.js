@@ -44,7 +44,7 @@ renderNavigator.defaultProps = {
     const SceneComponent = route.component;
 
     <View style={styles.container}>
-      <SceneComponent {...route.props} />
+      <SceneComponent {...route.passProps} />
     </View>
   ),
 };

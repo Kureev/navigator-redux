@@ -45,7 +45,7 @@ export default class PushedContent extends Component {
         </Text>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => actions.push({name: 'PushedContent', component: PushedContent})}>
+          onPress={() => actions.push({title: 'PushedContent', component: PushedContent})}>
           <Text style={{ fontSize: 16, }}>Push</Text>
         </TouchableOpacity>
 
