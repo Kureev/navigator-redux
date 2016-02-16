@@ -8,8 +8,6 @@ import React, {
   View
 } from 'react-native';
 
-const mapper = require('./routeMapper');
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
