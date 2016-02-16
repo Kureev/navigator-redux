@@ -2,7 +2,6 @@
   "extends": "react-native/packager/react-packager/.babelrc",
   "presets": [
     "react",
-    "stage-0"
+    "stage-2"
   ],
-  "plugins": ["transform-object-rest-spread"]
 }
