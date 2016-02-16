@@ -11,7 +11,7 @@ const styles = StyleSheet.create({container: {flex: 1}});
 /**
  * A functional component for rendering navigator
  * @param  {Number} options.index Navigation stack's current index
- * @param  {Immutable.List} options.stack Navigation stack
+ * @param  {Immutable.Stack} options.stack Navigation stack
  * @param  {Object} options.actions Navigator's actions
  * @param  {Function} options.renderer Container renderer function
  * @param  {Number|Object} options.style Custom navigator style
