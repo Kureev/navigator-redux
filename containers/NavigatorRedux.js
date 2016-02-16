@@ -41,11 +41,7 @@ renderNavigator.propTypes = {
 
 renderNavigator.defaultProps = {
   renderer: (route) => {
-    return (
-      <View style={styles.container}>
-        {route}
-      </View>
-    );
+    <View style={styles.container}> {route} </View>;
   },
 };
 
