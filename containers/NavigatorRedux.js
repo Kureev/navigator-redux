@@ -18,16 +18,16 @@ const styles = StyleSheet.create({container: {flex: 1}});
  * @return {React.Element}
  */
 function renderNavigator(props) {
-  const {index, stack, actions, mapper, renderer, style} = props;
+  const {index, stack, actions, renderer, style} = props;
   const route = stack.get(index);
 
-  invariant(route,
-    'Your navigation stack is empty. Check the place where you ' +
+  invariant(route.component,
+    'You must pass a React component. Check the place where you ' +
     'use `makeNavState`,seems you missed to fulfill it with data!'
   );
 
   return renderer(
-    React.cloneElement(route, {nav: {route, index, stack, actions}})
+    React.cloneElement(route.component, {nav: {index, stack, actions}})
   );
 }
 
@@ -35,14 +35,13 @@ renderNavigator.propTypes = {
   index: PropTypes.number.isRequired,
   stack: PropTypes.instanceOf(Immutable.Stack).isRequired,
   actions: PropTypes.object.isRequired,
-  mapper: PropTypes.func.isRequired,
   renderer: PropTypes.func,
   style: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
 };
 
 renderNavigator.defaultProps = {
   renderer: (route) => (
-    const SceneComponent = mapper(route);
+    const SceneComponent = route.component;
 
     <View style={styles.container}>
       <SceneComponent {...route.props} />

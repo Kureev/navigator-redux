@@ -8,6 +8,8 @@ import React, {
   View
 } from 'react-native';
 
+const mapper = require('./routeMapper');
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -43,7 +45,7 @@ export default class PushedContent extends Component {
         </Text>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => actions.push({name: 'PushedContent'})}>
+          onPress={() => actions.push({name: 'PushedContent', component: PushedContent})}>
           <Text style={{ fontSize: 16, }}>Push</Text>
         </TouchableOpacity>
 

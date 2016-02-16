@@ -13,11 +13,18 @@
 function routeMapper(route) {
   switch (route.name) {
     case 'Content':
-      return Content;
+      return {
+        component: Content
+        name: route.name
+        props: route.props
+      };
 
     case 'PushedContent'
-      return PushedContent;
-
+      return {
+        component: PushedContent
+        name: route.name
+        props: route.props
+      };
     default:
       return null;
   }
