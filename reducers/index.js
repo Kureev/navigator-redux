@@ -5,16 +5,14 @@ module.exports = function navigate(state, {type, payload}) {
     return {};
   }
 
-  const stack = state.__navRedux.stack;
-  const index = state.__navRedux.index;
+  const stack = state.stack;
+  const index = state.index;
 
   switch (type) {
     case PUSH:
       return Object.assign({}, state, {
-        __navRedux: {
-          stack: stack.push(payload),
-          index: 0,
-        },
+        stack: stack.push(payload),
+        index: 0,
       });
 
     case POP:
@@ -23,10 +21,8 @@ module.exports = function navigate(state, {type, payload}) {
       }
 
       return Object.assign({}, state, {
-        __navRedux: {
-          stack: stack.shift(),
-          index: 0,
-        },
+        stack: stack.shift(),
+        index: 0,
       });
 
     case REPLACE:
