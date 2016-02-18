@@ -1,6 +1,6 @@
 const {expect} = require('chai');
-const {PUSH, POP, REPLACE} = require('../../constants/navigation');
 const reducer = require('../../reducers');
+const {push, pop, replace} = require('../../actions');
 const initialState = require('../../makeNavState')();
 
 describe('navigate reducer', () => {
@@ -9,53 +9,51 @@ describe('navigate reducer', () => {
   });
 
   it('expect PUSH to add a new item to the navigation stack', () => {
-    const pushRoute = {
-      type: PUSH,
-      payload: 0,
-    };
-
+    const pushRoute = push();
     const state = reducer(initialState, pushRoute);
 
     expect(state.stack.count()).to.be.equal(1);
     expect(state.stack.first()).to.be.equal(pushRoute.payload);
   });
 
-  it('expect POP to remove a new item from the navigation stack', () => {
-    let state = reducer(initialState, {
-      type: PUSH,
-      payload: 0,
-    });
-
-    state = reducer(state, {
-      type: PUSH,
-      payload: 1,
-    });
+  it('expect POP to move index one step back', () => {
+    let state = reducer(initialState, push());
+    state = reducer(state, push());
 
     expect(state.stack.count()).to.be.equal(2);
     expect(state.index).to.be.equal(0);
 
-    state = reducer(state, {type: POP});
+    state = reducer(state, pop());
 
-    expect(state.stack.count()).to.be.equal(1);
+    expect(state.stack.count()).to.be.equal(2);
+    expect(state.index).to.be.equal(1);
+  });
+
+  it('expect POP -> PUSH to replace the first item of the stack', () => {
+    let state = reducer(initialState, push());
+    state = reducer(state, push());
+
+    expect(state.stack.count()).to.be.equal(2);
     expect(state.index).to.be.equal(0);
+
+    state = reducer(state, pop());
+
+    expect(state.stack.count()).to.be.equal(2);
+    expect(state.index).to.be.equal(1);
+
+    state = reducer(state, push('test'));
+
+    expect(state.stack.count()).to.be.equal(2);
+    expect(state.index).to.be.equal(0);
+    expect(state.stack.first()).to.be.equal('test');
   });
 
   it('expect REPLACE to replace the last stack item', () => {
-    let state = reducer(initialState, {
-      type: PUSH,
-      payload: 0,
-    });
-
-    state = reducer(state, {
-      type: PUSH,
-      payload: 1,
-    });
-    state = reducer(state, {
-      type: REPLACE,
-      payload: 2,
-    });
+    let state = reducer(initialState, push());
+    state = reducer(state, push());
+    state = reducer(state, replace('test'));
 
     expect(state.stack.count()).to.be.equal(2);
-    expect(state.stack.first()).to.be.equal(2);
+    expect(state.stack.first()).to.be.equal('test');
   });
 });
