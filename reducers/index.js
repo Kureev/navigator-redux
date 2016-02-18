@@ -5,11 +5,15 @@ module.exports = function navigate(state, {type, payload}) {
     return {};
   }
 
-  const stack = state.stack;
-  const index = state.index;
+  let stack = state.stack;
+  let index = state.index;
 
   switch (type) {
     case PUSH:
+      if (index !== 0) {
+        stack = stack.skip(index);
+      }
+
       return Object.assign({}, state, {
         stack: stack.push(payload),
         index: 0,
@@ -21,8 +25,7 @@ module.exports = function navigate(state, {type, payload}) {
       }
 
       return Object.assign({}, state, {
-        stack: stack.shift(),
-        index: 0,
+        index: index + 1,
       });
 
     case REPLACE:
@@ -32,7 +35,6 @@ module.exports = function navigate(state, {type, payload}) {
 
       return Object.assign({}, state, {
         stack: stack.splice(index, 1, payload),
-        index: index,
       });
 
     default:
