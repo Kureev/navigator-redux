@@ -16,8 +16,8 @@ describe('navigate reducer', () => {
 
     const state = reducer(initialState, pushRoute);
 
-    expect(state.__nav.stack.count()).to.be.equal(1);
-    expect(state.__nav.stack.first()).to.be.equal(pushRoute.payload);
+    expect(state.stack.count()).to.be.equal(1);
+    expect(state.stack.first()).to.be.equal(pushRoute.payload);
   });
 
   it('expect POP to remove a new item from the navigation stack', () => {
@@ -31,13 +31,13 @@ describe('navigate reducer', () => {
       payload: 1,
     });
 
-    expect(state.__nav.stack.count()).to.be.equal(2);
-    expect(state.__nav.index).to.be.equal(0);
+    expect(state.stack.count()).to.be.equal(2);
+    expect(state.index).to.be.equal(0);
 
     state = reducer(state, {type: POP});
 
-    expect(state.__nav.stack.count()).to.be.equal(2);
-    expect(state.__nav.index).to.be.equal(1);
+    expect(state.stack.count()).to.be.equal(1);
+    expect(state.index).to.be.equal(0);
   });
 
   it('expect REPLACE to replace the last stack item', () => {
@@ -47,10 +47,15 @@ describe('navigate reducer', () => {
     });
 
     state = reducer(state, {
-      type: REPLACE,
+      type: PUSH,
       payload: 1,
     });
+    state = reducer(state, {
+      type: REPLACE,
+      payload: 2,
+    });
 
-    expect(state.__nav.stack.first()).to.be.equal(1);
+    expect(state.stack.count()).to.be.equal(2);
+    expect(state.stack.first()).to.be.equal(2);
   });
 });

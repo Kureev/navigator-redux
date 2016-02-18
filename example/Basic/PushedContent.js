@@ -52,6 +52,12 @@ export default class PushedContent extends Component {
           onPress={() => actions.pop()}>
           <Text style={{ fontSize: 16, }}>Pop</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => actions.replace({title: 'PushedContent', component: PushedContent})}>
+          <Text style={{ fontSize: 16, }}>Replace</Text>
+        </TouchableOpacity>
       </View>
     );
   }
