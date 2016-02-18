@@ -47,8 +47,8 @@ renderNavigator.defaultProps = {
 
 module.exports = connect(
   (state) => ({
-    stack: state.__navRedux.stack,
-    index: state.__navRedux.index,
+    stack: state.stack,
+    index: state.index,
   }),
   (dispatch) => ({
     actions: bindActionCreators(actions, dispatch),
