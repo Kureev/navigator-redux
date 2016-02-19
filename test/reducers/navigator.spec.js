@@ -49,8 +49,8 @@ describe('navigate reducer', () => {
   });
 
   it('expect REPLACE to replace the last stack item', () => {
-    let state = reducer(initialState, push());
-    state = reducer(state, push());
+    let state = reducer(initialState, push(0));
+    state = reducer(state, push(1));
     state = reducer(state, replace('test'));
 
     expect(state.stack.count()).to.be.equal(2);
