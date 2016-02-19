@@ -1,4 +1,6 @@
-const {PUSH, POP, REPLACE} = require('../constants/navigation');
+
+import invariant from 'invariant';
+const {PUSH, POP, REPLACE, REPLACE_AT_INDEX} = require('../constants/navigation');
 
 module.exports = function navigate(state, {type, payload}) {
   if (!state) {
@@ -35,6 +37,18 @@ module.exports = function navigate(state, {type, payload}) {
 
       return Object.assign({}, state, {
         stack: stack.splice(index, 1, payload),
+      });
+
+    case REPLACE_AT_INDEX:
+      invariant(
+        payload.index < stack.count() - 1 && payload.index > 0,
+        'Index out of bounds when trying to replaceAtIndex: ' +
+        'your navigation stack contains ' + stack.count() + ' elements, ' +
+        'but you\'re trying to replace an element with index ' + payload.index,
+      );
+
+      return Object.assign({}, state, {
+        stack: stack.splice(payload.index, 1, payload.route),
       });
 
     default:

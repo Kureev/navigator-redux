@@ -1,6 +1,6 @@
 const {expect} = require('chai');
 const reducer = require('../../reducers');
-const {push, pop, replace} = require('../../actions');
+const {push, pop, replace, replaceAtIndex} = require('../../actions');
 const initialState = require('../../makeNavState')();
 
 describe('navigate reducer', () => {
@@ -55,5 +55,22 @@ describe('navigate reducer', () => {
 
     expect(state.stack.count()).to.be.equal(2);
     expect(state.stack.first()).to.be.equal('test');
+  });
+
+  it('expect REPLACE_AT_INDEX to replace the route at the index passed', () => {
+    let state = reducer(initialState, push('test0'));
+    state = reducer(state, push('test1'));
+    state = reducer(state, push('test2'));
+    state = reducer(state, push('test3'));
+    state = reducer(state, replaceAtIndex('test4', 2));
+
+    expect(() => { reducer(state, replaceAtIndex('test4', 10)); }).to.throw(Error);
+    expect(() => { reducer(state, replaceAtIndex('test4', -1)); }).to.throw(Error);
+
+    expect(state.stack.count()).to.be.equal(4);
+    expect(state.stack.get(0)).to.be.equal('test3');
+    expect(state.stack.get(1)).to.be.equal('test2');
+    expect(state.stack.get(2)).to.be.equal('test4');
+    expect(state.stack.get(3)).to.be.equal('test0');
   });
 });
