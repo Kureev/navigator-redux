@@ -55,7 +55,7 @@ export default class Content extends Component {
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => actions.pop}>
+          onPress={() => actions.pop()}>
           <Text style={{ fontSize: 16, }}>Pop</Text>
         </TouchableOpacity>
       </View>
