@@ -20,7 +20,7 @@ And finally, use it to make your navigation to work:
 ```jsx
 const store = createStore(
   navigationReducer,
-  makeNavState([<SomeInitialView/>])
+  makeNavState([{title:'Initial Route', component: YourComponent}])
 );
 
 AppRegistry.registerComponent('Basic', () => () => (
@@ -34,10 +34,10 @@ AppRegistry.registerComponent('Basic', () => () => (
 Each view in the stack, while rendered, will receive a `nav` property with `index`, `stack` and `actions`.
 - **index** {Number}. Used to track your navigation stack position
 - **stack** {Immutable.Stack}. Your navigation stack
-- **actions** {Object}:
-  - **push(component)**. Push a new navigation state
+- **actions** {Object}: `{title: 'Route Title', component: Component, [passProps: {text: 'Props'}]}` passProps is optional
+  - **push(Object)**. Push a new route to navigation state
   - **pop()**. Jump back to the previous navigation state
-  - **replace(component)**. Replace a current navigation state component by a given one
+  - **replace(Object)**. Replace a current navigation route by a given one
 
 For further reading, [check an example](https://github.com/Kureev/navigator-redux/blob/master/example/Basic/Content.js#L50-L66).
 
