@@ -1,4 +1,4 @@
-const {PUSH, POP, REPLACE} = require('../constants/navigation');
+const {PUSH, POP, REPLACE, REPLACE_AT_INDEX} = require('../constants/navigation');
 
 module.exports = function navigate(state, {type, payload}) {
   if (!state) {
@@ -35,6 +35,15 @@ module.exports = function navigate(state, {type, payload}) {
 
       return Object.assign({}, state, {
         stack: stack.splice(index, 1, payload),
+      });
+
+    case REPLACE_AT_INDEX:
+      if (payload.index > stack.count() - 1) {
+        return state;
+      }
+
+      return Object.assign({}, state, {
+        stack: stack.splice(payload.index, 1, payload.route),
       });
 
     default:
