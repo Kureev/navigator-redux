@@ -1,4 +1,4 @@
-const {PUSH, POP, REPLACE} = require('../constants/navigation');
+const {PUSH, POP, REPLACE, REPLACE_TO} = require('../constants/navigation');
 
 module.exports = {
   push: function push(route) {
@@ -17,6 +17,13 @@ module.exports = {
   replace: function replace(route) {
     return {
       type: REPLACE,
+      payload: route,
+    };
+  },
+
+  replaceTo: function replaceTo(route) {
+    return {
+      type: REPLACE_TO,
       payload: route,
     };
   },
