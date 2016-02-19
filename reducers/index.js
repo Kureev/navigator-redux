@@ -42,7 +42,9 @@ module.exports = function navigate(state, {type, payload}) {
     case REPLACE_AT_INDEX:
       invariant(
         payload.index < stack.count() - 1 && payload.index > 0,
-        'Index out of bounds when trying to replaceAtIndex',
+        'Index out of bounds when trying to replaceAtIndex: ' +
+        'your navigation stack contains ${stack.count()} elements, ' +
+        'but you\'re trying to replace an element with index ${payload.index}',
       );
 
       return Object.assign({}, state, {
