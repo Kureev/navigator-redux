@@ -27,7 +27,7 @@ function renderNavigator(props) {
   );
 
   return renderer(
-    React.createElement(route.component, {props: route.passProps, nav: {index, stack, actions}})
+    React.createElement(route.component, {...route.passProps, nav: {index, stack, actions}})
   );
 }
 
