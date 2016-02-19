@@ -64,6 +64,9 @@ describe('navigate reducer', () => {
     state = reducer(state, push('test3'));
     state = reducer(state, replaceAtIndex('test4', 2));
 
+    expect(() => { reducer(state, replaceAtIndex('test4', 10)); }).to.throw(Error);
+    expect(() => { reducer(state, replaceAtIndex('test4', -1)); }).to.throw(Error);
+
     expect(state.stack.count()).to.be.equal(4);
     expect(state.stack.get(0)).to.be.equal('test3');
     expect(state.stack.get(1)).to.be.equal('test2');
