@@ -1,4 +1,4 @@
-const {PUSH, POP, REPLACE, REPLACE_AT_INDEX} = require('../constants/navigation');
+const {PUSH, POP, REPLACE, REPLACE_AT_INDEX, RESET_TO} = require('../constants/navigation');
 
 module.exports = {
   push: function push(route) {
@@ -24,6 +24,12 @@ module.exports = {
     return {
       type: REPLACE_AT_INDEX,
       payload: {route, index},
+    };
+  },
+  resetTo: function resetTo(route) {
+    return {
+      type: RESET_TO,
+      payload: route,
     };
   },
 };

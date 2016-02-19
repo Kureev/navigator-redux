@@ -1,6 +1,6 @@
 const {expect} = require('chai');
 const reducer = require('../../reducers');
-const {push, pop, replace, replaceAtIndex} = require('../../actions');
+const {push, pop, replace, replaceAtIndex, resetTo} = require('../../actions');
 const initialState = require('../../makeNavState')();
 
 describe('navigate reducer', () => {
@@ -72,5 +72,14 @@ describe('navigate reducer', () => {
     expect(state.stack.get(1)).to.be.equal('test2');
     expect(state.stack.get(2)).to.be.equal('test4');
     expect(state.stack.get(3)).to.be.equal('test0');
+  });
+
+  it('expect RESET_TO to replace all stack for the route', () => {
+    let state = reducer(initialState, push(0));
+    state = reducer(state, push(1));
+    state = reducer(state, resetTo('test'));
+
+    expect(state.stack.count()).to.be.equal(1);
+    expect(state.stack.first()).to.be.equal('test');
   });
 });
