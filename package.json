@@ -23,6 +23,7 @@
     "mocha": "^2.4.3"
   },
   "peerDependencies": {
-    "react-native": "^0.20.0"
+    "react-native": "^0.20.0",
+    "react-redux": "^4.4.0"
   }
 }
