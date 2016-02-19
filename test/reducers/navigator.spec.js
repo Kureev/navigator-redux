@@ -74,7 +74,6 @@ describe('navigate reducer', () => {
     expect(state.stack.get(3)).to.be.equal('test0');
   });
 
-
   it('expect RESET_TO to replace all stack for the route', () => {
     let state = reducer(initialState, push(0));
     state = reducer(state, push(1));
