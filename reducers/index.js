@@ -1,6 +1,5 @@
-
 import invariant from 'invariant';
-const {PUSH, POP, REPLACE, REPLACE_AT_INDEX} = require('../constants/navigation');
+const {PUSH, POP, REPLACE, REPLACE_AT_INDEX, REPLACE_TO} = require('../constants/navigation');
 
 module.exports = function navigate(state, {type, payload}) {
   if (!state) {
@@ -49,6 +48,12 @@ module.exports = function navigate(state, {type, payload}) {
 
       return Object.assign({}, state, {
         stack: stack.splice(payload.index, 1, payload.route),
+      });
+
+    case REPLACE_TO:
+      return Object.assign({}, state, {
+        stack: stack.clear().push(payload),
+        index: 0,
       });
 
     default:
