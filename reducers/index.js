@@ -1,6 +1,6 @@
 
 import invariant from 'invariant';
-const {PUSH, POP, REPLACE, REPLACE_AT_INDEX} = require('../constants/navigation');
+const {PUSH, POP, REPLACE, REPLACE_AT_INDEX, REPLACE_PREVIOUS} = require('../constants/navigation');
 
 module.exports = function navigate(state, {type, payload}) {
   if (!state) {
@@ -49,6 +49,17 @@ module.exports = function navigate(state, {type, payload}) {
 
       return Object.assign({}, state, {
         stack: stack.splice(payload.index, 1, payload.route),
+      });
+
+    case REPLACE_PREVIOUS:
+      invariant(
+        stack.count() > index + 1,
+        'There is no previous scene in the stack ' +
+        'at the current index: ' + index,
+      );
+
+      return Object.assign({}, state, {
+        stack: stack.splice(index + 1, 1, payload),
       });
 
     default:
