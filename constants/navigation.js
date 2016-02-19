@@ -3,5 +3,5 @@ module.exports = {
   POP: 'POP',
   REPLACE: 'REPLACE',
   REPLACE_AT_INDEX: 'REPLACE_AT_INDEX',
-  REPLACE_TO: 'REPLACE_TO',
+  RESET_TO: 'RESET_TO',
 };
