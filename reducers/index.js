@@ -1,6 +1,14 @@
 
 import invariant from 'invariant';
-const {PUSH, POP, REPLACE, REPLACE_AT_INDEX, REPLACE_PREVIOUS} = require('../constants/navigation');
+import Immutable from 'immutable';
+const {
+  PUSH,
+  POP,
+  REPLACE,
+  REPLACE_AT_INDEX,
+  REPLACE_PREVIOUS,
+  IMMEDIATELY_RESET_ROUTE_STACK,
+} = require('../constants/navigation');
 
 module.exports = function navigate(state, {type, payload}) {
   if (!state) {
@@ -60,6 +68,17 @@ module.exports = function navigate(state, {type, payload}) {
 
       return Object.assign({}, state, {
         stack: stack.splice(index + 1, 1, payload),
+      });
+
+    case IMMEDIATELY_RESET_ROUTE_STACK:
+      invariant(
+        payload && payload.length >= 1,
+        'Make sure to pass an array of routes with at least one route.'
+      );
+
+      return Object.assign({}, state, {
+        stack: new Immutable.Stack(payload),
+        index: 0,
       });
 
     default:

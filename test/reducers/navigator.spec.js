@@ -1,7 +1,14 @@
 const {expect} = require('chai');
 const reducer = require('../../reducers');
-const {push, pop, replace, replaceAtIndex, replacePrevious} = require('../../actions');
 const initialState = require('../../makeNavState')();
+const {
+  push,
+  pop,
+  replace,
+  replaceAtIndex,
+  replacePrevious,
+  immediatelyResetRouteStack,
+} = require('../../actions');
 
 describe('navigate reducer', () => {
   it('expect to return an initial state if no valid action provided', () => {
@@ -84,5 +91,17 @@ describe('navigate reducer', () => {
 
     expect(state.stack.count()).to.be.equal(2);
     expect(state.stack.get(1)).to.be.equal('test2');
+  });
+
+  it('expect IMMEDIATELY_RESET_ROUTE_STACK to replace all the stack with the new stack', () => {
+    let state = reducer(initialState, push('test0'));
+
+    expect(() => { reducer(state, immediatelyResetRouteStack([])); }).to.throw(Error);
+
+    expect(state.stack.count()).to.be.equal(1);
+    state = reducer(state, immediatelyResetRouteStack(['newTest0', 'newTest1']));
+    expect(state.stack.count()).to.be.equal(2);
+    expect(state.stack.get(0)).to.be.equal('newTest0');
+    expect(state.stack.get(1)).to.be.equal('newTest1');
   });
 });
