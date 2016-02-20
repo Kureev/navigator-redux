@@ -4,6 +4,7 @@ const {
   PUSH,
   POP,
   REPLACE,
+  REPLACE_TO,
   REPLACE_AT_INDEX,
   REPLACE_PREVIOUS,
   IMMEDIATELY_RESET_ROUTE_STACK,
@@ -44,6 +45,12 @@ module.exports = function navigate(state, {type, payload}) {
 
       return Object.assign({}, state, {
         stack: stack.splice(index, 1, payload),
+      });
+
+    case REPLACE_TO:
+      return Object.assign({}, state, {
+        stack: stack.clear().push(payload),
+        index: 0,
       });
 
     case REPLACE_AT_INDEX:

@@ -5,6 +5,7 @@ const {
   push,
   pop,
   replace,
+  replaceTo,
   replaceAtIndex,
   replacePrevious,
   immediatelyResetRouteStack,
@@ -62,6 +63,14 @@ describe('navigate reducer', () => {
 
     expect(state.stack.count()).to.be.equal(2);
     expect(state.stack.first()).to.be.equal('test');
+  });
+  it('expect REPLACE_TO to replace all stack for the route', () => {
+    let state = reducer(initialState, push(0));
+    state = reducer(state, push(1));
+    state = reducer(state, replaceTo('test'));
+
+    expect(state.stack.count()).to.be.equal(1);
+    expect(state.stack.first()).to.be.equal('test1');
   });
 
   it('expect REPLACE_AT_INDEX to replace the route at the index passed', () => {
