@@ -1,6 +1,5 @@
 
 import invariant from 'invariant';
-import Immutable from 'immutable';
 const {
   PUSH,
   POP,
@@ -77,7 +76,7 @@ module.exports = function navigate(state, {type, payload}) {
       );
 
       return Object.assign({}, state, {
-        stack: new Immutable.Stack(payload),
+        stack: state.stack.clear().pushAll(payload),
         index: 0,
       });
 
