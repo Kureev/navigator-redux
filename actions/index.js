@@ -1,4 +1,11 @@
-const {PUSH, POP, REPLACE, REPLACE_AT_INDEX, REPLACE_PREVIOUS} = require('../constants/navigation');
+const {
+  PUSH,
+  POP,
+  REPLACE,
+  REPLACE_AT_INDEX,
+  REPLACE_PREVIOUS,
+  IMMEDIATELY_RESET_ROUTE_STACK,
+} = require('../constants/navigation');
 
 module.exports = {
   push: function push(route) {
@@ -30,6 +37,12 @@ module.exports = {
     return {
       type: REPLACE_PREVIOUS,
       payload: route,
+    };
+  },
+  immediatelyResetRouteStack: function immediatelyResetRouteStack(routeStack) {
+    return {
+      type: IMMEDIATELY_RESET_ROUTE_STACK,
+      payload: routeStack,
     };
   },
 };
