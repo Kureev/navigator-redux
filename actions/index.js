@@ -2,6 +2,7 @@ const {
   PUSH,
   POP,
   REPLACE,
+  RESET_TO,
   REPLACE_AT_INDEX,
   REPLACE_PREVIOUS,
   IMMEDIATELY_RESET_ROUTE_STACK,
@@ -24,6 +25,12 @@ module.exports = {
   replace: function replace(route) {
     return {
       type: REPLACE,
+      payload: route,
+    };
+  },
+  resetTo: function resetTo(route) {
+    return {
+      type: RESET_TO,
       payload: route,
     };
   },
