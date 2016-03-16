@@ -24,7 +24,7 @@ class NavigatorRedux extends Component {
 
   render() {
     const {index, stack, renderScene} = this.props;
-    return renderScene(stack, index);
+    return renderScene(stack.get(index), stack, index);
   }
 }
 
