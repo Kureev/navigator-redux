@@ -45,12 +45,13 @@ renderNavigator.defaultProps = {
   },
 };
 
-module.exports = connect(
-  (state) => ({
-    stack: state.__navRedux.stack,
-    index: state.__navRedux.index,
-  }),
-  (dispatch) => ({
-    actions: bindActionCreators(actions, dispatch),
-  })
-)(renderNavigator);
+const mapStateToProps = (state) => ({
+  stack: state.__navRedux.stack,
+  index: state.__navRedux.index,
+});
+
+const mapActionsToProps = (dispatch) => ({
+  actions: bindActionCreators(actions, dispatch),
+});
+
+module.exports = connect(mapStateToProps, mapActionsToProps)(renderNavigator);
