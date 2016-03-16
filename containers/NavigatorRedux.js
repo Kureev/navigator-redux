@@ -19,20 +19,12 @@ class NavigatorRedux extends Component {
     /**
      * Custom props that would be accesible from the child tree
      */
-    return {navigatorRedux: {actions}};
+    return {navigatorRedux: {actions: this.props.actions}};
   }
 
   render() {
-    const {index, stack, routeMapper, renderScene} = props;
-    const routeName = stack.get(index);
-    const route = routeMapper(routeName);
-
-    invariant(route.component,
-      `We weren\'t able to find any route for the "${routeName}". ` +
-      'Please, check your routeMapper function'
-    );
-
-    return renderScene(React.createElement(route, route.passProps));
+    const {index, stack, renderScene} = this.props;
+    return renderScene(stack, index);
   }
 }
 
