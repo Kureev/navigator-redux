@@ -1,48 +1,50 @@
-const React = require('react-native');
 const Immutable = require('immutable');
 const {bindActionCreators} = require('redux');
 const {connect} = require('react-redux');
 const actions = require('../actions');
 const invariant = require('invariant');
 
-const {View, StyleSheet, PropTypes} = React;
-const styles = StyleSheet.create({container: {flex: 1}});
+const {PropTypes, Component} = React;
 
 /**
  * A functional component for rendering navigator
  * @param  {Number} options.index Navigation stack's current index
  * @param  {Immutable.Stack} options.stack Navigation stack
  * @param  {Object} options.actions Navigator's actions
- * @param  {Function} options.renderer Container renderer function
- * @param  {Number|Object} options.style Custom navigator style
- * @return {React.Element}
+ * @param  {Function} options.renderScene Scene renderer
+ * @return {React.Component}
  */
-function renderNavigator(props) {
-  const {index, stack, actions, renderer, style} = props;
-  const route = stack.get(index);
+class NavigatorRedux extends Component {
+  getChildContext() {
+    /**
+     * Custom props that would be accesible from the child tree
+     */
+    return {navigatorRedux: {actions}};
+  }
 
-  invariant(route.component,
-    'You must pass a React component. Check the place where you ' +
-    'use `makeNavState`,seems you missed to fulfill it with data!'
-  );
+  render() {
+    const {index, stack, routeMapper, renderScene} = props;
+    const routeName = stack.get(index);
+    const route = routeMapper(routeName);
 
-  return renderer(
-    React.createElement(route.component, {...route.passProps, nav: {index, stack, actions}})
-  );
+    invariant(route.component,
+      `We weren\'t able to find any route for the "${routeName}". ` +
+      'Please, check your routeMapper function'
+    );
+
+    return renderScene(React.createElement(route, route.passProps));
+  }
 }
 
-renderNavigator.propTypes = {
+NavigatorRedux.propTypes = {
   index: PropTypes.number.isRequired,
   stack: PropTypes.instanceOf(Immutable.Stack).isRequired,
   actions: PropTypes.object.isRequired,
-  renderer: PropTypes.func,
-  style: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
+  renderScene: PropTypes.func,
 };
 
-renderNavigator.defaultProps = {
-  renderer: (route) => {
-    return <View style={styles.container}>{route}</View>;
-  },
+NavigatorRedux.defaultProps = {
+  renderScene: (route) => route,
 };
 
 const mapStateToProps = (state) => ({
