@@ -7,11 +7,13 @@
   },
   "dependencies": {
     "navigator-redux": "^0.2.2",
-    "react-native": "^0.20.0",
+    "react": "^0.14.8",
+    "react-native": "^0.22.0",
     "react-redux": "^4.1.2",
     "redux": "^3.1.7"
   },
   "devDependencies": {
-    "babel-preset-react-native": "^1.4.0"
+    "babel-preset-react-native": "^1.4.0",
+    "babel-preset-stage-2": "^6.5.0"
   }
 }
