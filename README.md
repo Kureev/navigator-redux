@@ -1,4 +1,6 @@
 ## What is this?
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/Kureev/navigator-redux.svg)](https://greenkeeper.io/)
 Few days ago I started this project as a spin-off from [navigator-rfc](https://github.com/ericvicenti/navigation-rfc). This repo is an implementation of the super-simple navigator behavior (without animated transitions! Please, keep it in mind).
 
 ## Motivation
